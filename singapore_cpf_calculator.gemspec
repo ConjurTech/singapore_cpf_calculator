@@ -5,7 +5,7 @@ require 'singapore_cpf_calculator/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "singapore_cpf_calculator"
-  spec.version       = SingaporeCpfCalculator::VERSION
+  spec.version       = SingaporeCPFCalculator::VERSION
   spec.authors       = ["Ronald Maravilla"]
   spec.email         = ["rmaravilla@payrollhero.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}
@@ -20,4 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
+
+  spec.add_dependency "activesupport"
 end
