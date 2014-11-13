@@ -97,6 +97,7 @@ module SingaporeCPFCalculator
     def date_modules
       [
         Year2014,
+        Year2015,
       ]
     end
   end
@@ -106,3 +107,4 @@ end
 require_relative "singapore_cpf_calculator/base_calculator"
 require_relative "singapore_cpf_calculator/year_common"
 require_relative "singapore_cpf_calculator/year_2014"
+require_relative "singapore_cpf_calculator/year_2015"
