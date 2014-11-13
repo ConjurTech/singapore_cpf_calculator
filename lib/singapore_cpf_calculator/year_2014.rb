@@ -28,6 +28,7 @@ module SingaporeCPFCalculator
           SPR2FG,
           SPR1GG,
           SPR1FG,
+          BeforeSPR,
         ]
       end
     end

@@ -18,7 +18,7 @@ module SingaporeCPFCalculator
     #
     # @param [Fixnum] age: age of the employee as of the specified date
     # @param [Date] date: relavant date when the CPF contribution is being calculated
-    # @param [String] residency_status: ["citizen", "permanent_resident", "foreigner"]
+    # @param [String] residency_status: ["citizen", "permanent_resident"]
     # @param [Date] spr_start_date: date when the employee became a Singapore permanent resident
     # @param [String] employee_contribution_type: ["full", "graduated"]
     # @param [String] employer_contribution_type: ["full", "graduated"]
@@ -105,6 +105,7 @@ module SingaporeCPFCalculator
 end
 
 require_relative "singapore_cpf_calculator/base_calculator"
+require_relative "singapore_cpf_calculator/before_spr"
 require_relative "singapore_cpf_calculator/year_common"
 require_relative "singapore_cpf_calculator/year_2014"
 require_relative "singapore_cpf_calculator/year_2015"

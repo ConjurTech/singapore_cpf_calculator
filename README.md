@@ -5,6 +5,14 @@ Central Provident Fund (CPF) contributions.
 
 ## Support
 
+  * [Year 2015](http://mycpf.cpf.gov.sg/NR/rdonlyres/9F38419D-1342-4426-820E-32BA8FDE5C6D/0/CPFContributionandAllocationRatesfrom1January2015.pdf)
+    * Singapore Citizens or Singapore Permanent Residents (3rd Year Onwards)
+    * Singapore Permanent Residents (SPRs) during 1st Year of SPR Status
+      * Graduated Employer & Employee (G/G) Contribution Rate
+      * Full Employer & Graduated Employee (F/G) Contribution Rate
+    * Singapore Permanent Residents (SPRs) during 2nd Year of SPR Status
+      * Graduated Employer & Employee (G/G) Contribution Rate
+      * Full Employer & Graduated Employee (F/G) Contribution Rate
   * Year 2014
     * [Singapore Citizens or Singapore Permanent Residents (3rd Year Onwards)](http://mycpf.cpf.gov.sg/NR/rdonlyres/B169395E-335C-479C-AB6E-74BA5FBEC6F0/0/CPFconratetable_from1Jan2014_forPTEandNPEN_SC.pdf)
     * Singapore Permanent Residents (SPRs) during 2nd Year of SPR Status
@@ -30,6 +38,9 @@ Or install it yourself as:
 
 ## Usage
 
+Use `SingaporeCPFCalculator.calculate` to calculate for CPF contribution. The method return a hash
+of the amounts for employee, employer, and the total.
+
 ```ruby
   require "singapore_cpf_calculator"
 
@@ -44,6 +55,28 @@ Or install it yourself as:
 
   result # => { "total" => 343.00, "employee" => 190.00, "employer" => 153.00 }
 ```
+
+The following parameters needs to be specified:
+
+  * **age** : age of the employee
+  * **date** : current date when the CPF is being calculated for
+  * **residency\_status** : residency status of the employee
+    * accepted values : `"citizen"`, `"permanent_resident"`
+  * **spr\_start\_date** : date when Singapore Permanent Residency (SPR) started
+    * notes:
+      * this affects how the employee is classified into SPR1, SPR2 or SPR3
+      * required if the `residency_status` is `permanent_resident`
+    * see: [Year of Singapore Permanent Resident (SPR) Status](http://mycpf.cpf.gov.sg/NR/exeres/3D0D66F9-0085-4FD5-9CB5-35B55C0ADA53,frameless.htm)
+  * **ordinary_wages** :
+    * see : [ordinary wages definition](http://mycpf.cpf.gov.sg/NR/exeres/24537890-6D8E-495E-80D5-E5EFEFCA1905,frameless.htm)
+  * **additional_wages** :
+    * see : [additional wages definition](http://mycpf.cpf.gov.sg/Employers/Employers_Guide_to_CPF/Glossary/Glossary_Additional_Wages.htm)
+  * **employee\_contribution\_type** : type of rates to use for the employee's contribution
+    * accepted values : `"full"`, `"graduated"`
+    * note: *full* rates is not supported if the employer's contribution type is *graduated*
+  * **employer\_contribution\_type** : type of rates to use
+    * accepted values : `"full"`, `"graduated"` type of rates to use for the employer's contribution
+    * note: *graduated* rates is not supported if the employee's contribution type is *full*
 
 ## Contributing
 
