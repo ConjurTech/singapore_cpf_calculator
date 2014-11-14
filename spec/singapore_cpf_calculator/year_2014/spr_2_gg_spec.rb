@@ -5,7 +5,7 @@ describe SingaporeCPFCalculator::Year2014::SPR2GG do
   subject(:mod) { described_class }
 
   describe ".applies_to?" do
-    let(:current_date) { Date.new(2014, 11, 15) }
+    let(:current_date) { Date.new(2014, 7, 1) }
     let(:spr_start_date) { nil }
     let(:employee_contribution_type) { nil }
     let(:employer_contribution_type) { nil }
@@ -25,30 +25,27 @@ describe SingaporeCPFCalculator::Year2014::SPR2GG do
 
     context "when the employee is a permanent resident on their 3rd year" do
       let(:status) { "permanent_resident" }
-      let(:spr_start_date) { current_date - 2.years - 1.day }
+      let(:spr_start_date) { Date.new(2012, 6, 20) }
       it { expect( result ).to be_falsey }
     end
 
     context "when the employee is a permanent resident on their 2nd year" do
+      let(:status) { "permanent_resident" }
+      let(:spr_start_date) { Date.new(2013, 6, 20) }
+
       context "for full employer and employee contribution type" do
-        let(:status) { "permanent_resident" }
-        let(:spr_start_date) { current_date - 1.years - 1.day }
         let(:employee_contribution_type) { "full" }
         let(:employer_contribution_type) { "full" }
         it { expect( result ).to be_falsey }
       end
 
       context "for graduated employer and employee contribution type" do
-        let(:status) { "permanent_resident" }
-        let(:spr_start_date) { current_date - 1.years - 1.day }
         let(:employee_contribution_type) { "graduated" }
         let(:employer_contribution_type) { "graduated" }
         it { expect( result ).to be_truthy }
       end
 
       context "for full employer and graduated employee contribution type" do
-        let(:status) { "permanent_resident" }
-        let(:spr_start_date) { current_date - 1.years - 1.day }
         let(:employee_contribution_type) { "graduated" }
         let(:employer_contribution_type) { "full" }
         it { expect( result ).to be_falsey }
@@ -56,25 +53,22 @@ describe SingaporeCPFCalculator::Year2014::SPR2GG do
     end
 
     context "when the employee is a permanent resident on their 1st year" do
+      let(:status) { "permanent_resident" }
+      let(:spr_start_date) { Date.new(2014, 6, 20) }
+
       context "for full employer and employee contribution type" do
-        let(:status) { "permanent_resident" }
-        let(:spr_start_date) { current_date }
         let(:employee_contribution_type) { "full" }
         let(:employer_contribution_type) { "full" }
         it { expect( result ).to be_falsey }
       end
 
       context "for graduated employer and employee contribution type" do
-        let(:status) { "permanent_resident" }
-        let(:spr_start_date) { current_date }
         let(:employee_contribution_type) { "graduated" }
         let(:employer_contribution_type) { "graduated" }
         it { expect( result ).to be_falsey }
       end
 
       context "for full employer and graduated employee contribution type" do
-        let(:status) { "permanent_resident" }
-        let(:spr_start_date) { current_date }
         let(:employee_contribution_type) { "graduated" }
         let(:employer_contribution_type) { "full" }
         it { expect( result ).to be_falsey }

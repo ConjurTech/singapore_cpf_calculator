@@ -31,7 +31,7 @@ describe SingaporeCPFCalculator::Year2015 do
                                        employer_contribution_type: employer_contribution_type
     }
 
-    let(:current_date) { Date.new(2014, 11, 15) }
+    let(:current_date) { Date.new(2015, 11, 15) }
     let(:employee_contribution_type) { nil }
     let(:employer_contribution_type) { nil }
 
@@ -42,71 +42,146 @@ describe SingaporeCPFCalculator::Year2015 do
       it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
     end
 
-    context "when the employee is in their year 1 of permanent residency" do
+    context "when the employee is a permanent resident" do
       let(:status) { "permanent_resident" }
 
-      let(:spr_start_date) { Date.new(2013, 11, 30) }
+      context "when the employee is in their year 1 of permanent residency" do
+        context "on the start of the SPR1" do
+          let(:spr_start_date) { Date.new(2015, 6, 20) }
+          let(:current_date) { Date.new(2015, 6, 20) }
 
-      context "when the employer pays partial contribution" do
-        let(:employer_contribution_type) { "graduated" }
+          context "when the employer pays partial contribution" do
+            let(:employer_contribution_type) { "graduated" }
 
 
-        context "when employee pays partial" do
-          let(:employee_contribution_type) { "graduated" }
-          it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR1GG }
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR1GG }
+            end
+          end
+
+          context "when the employer pays full contribution" do
+            let(:employer_contribution_type) { "full" }
+
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR1FG }
+            end
+
+            context "when employee pays full" do
+              let(:employee_contribution_type) { "full" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
+            end
+          end
+        end
+
+        context "on the end of the SPR1" do
+          let(:spr_start_date) { Date.new(2014, 6, 20) }
+          let(:current_date) { Date.new(2015, 6, 30) }
+
+          context "when the employer pays partial contribution" do
+            let(:employer_contribution_type) { "graduated" }
+
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR1GG }
+            end
+          end
+
+          context "when the employer pays full contribution" do
+            let(:employer_contribution_type) { "full" }
+
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR1FG }
+            end
+
+            context "when employee pays full" do
+              let(:employee_contribution_type) { "full" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
+            end
+          end
         end
       end
 
-      context "when the employer pays full contribution" do
-        let(:employer_contribution_type) { "full" }
+      context "when the employee is in their year 2 of permanent residency" do
+        context "on the start of the SPR2" do
+          let(:spr_start_date) { Date.new(2014, 6, 20) }
+          let(:current_date) { Date.new(2015, 7, 1) }
 
-        context "when employee pays partial" do
-          let(:employee_contribution_type) { "graduated" }
-          it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR1FG }
+          context "when the employer pays partial contribution" do
+            let(:employer_contribution_type) { "graduated" }
+
+
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR2GG }
+            end
+          end
+
+          context "when the employer pays full contribution" do
+            let(:employer_contribution_type) { "full" }
+
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR2FG }
+            end
+
+            context "when employee pays full" do
+              let(:employee_contribution_type) { "full" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
+            end
+          end
         end
 
-        context "when employee pays full" do
-          let(:employee_contribution_type) { "full" }
+        context "on the end of the SPR2" do
+          let(:spr_start_date) { Date.new(2013, 6, 20) }
+          let(:current_date) { Date.new(2015, 6, 30) }
+
+          context "when the employer pays partial contribution" do
+            let(:employer_contribution_type) { "graduated" }
+
+
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR2GG }
+            end
+          end
+
+          context "when the employer pays full contribution" do
+            let(:employer_contribution_type) { "full" }
+
+            context "when employee pays partial" do
+              let(:employee_contribution_type) { "graduated" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR2FG }
+            end
+
+            context "when employee pays full" do
+              let(:employee_contribution_type) { "full" }
+              it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
+            end
+          end
+        end
+      end
+
+      context "when the employee is in their year 3 of permanent residency" do
+        context "on the start of the SPR3" do
+          let(:spr_start_date) { Date.new(2013, 6, 20) }
+          let(:current_date) { Date.new(2015, 7, 1) }
+
+          it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
+        end
+
+        context "on SPR3 period" do
+          let(:spr_start_date) { Date.new(2011, 6, 20) }
+          let(:current_date) { Date.new(2015, 6, 30) }
+
           it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
         end
       end
+
     end
 
-    context "when the employee is in their year 2 of permanent residency" do
-      let(:status) { "permanent_resident" }
-      let(:spr_start_date) { Date.new(2012, 11, 30) }
-
-      context "when the employer pays partial contribution" do
-        let(:employer_contribution_type) { "graduated" }
-
-
-        context "when employee pays partial" do
-          let(:employee_contribution_type) { "graduated" }
-          it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR2GG }
-        end
-      end
-
-      context "when the employer pays full contribution" do
-        let(:employer_contribution_type) { "full" }
-
-        context "when employee pays partial" do
-          let(:employee_contribution_type) { "graduated" }
-          it { expect(mod).to be SingaporeCPFCalculator::Year2015::SPR2FG }
-        end
-
-        context "when employee pays full" do
-          let(:employee_contribution_type) { "full" }
-          it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
-        end
-      end
-    end
-
-    context "when the employee is in their year 3 of permanent residency" do
-      let(:status) { "permanent_resident" }
-      let(:spr_start_date) { Date.new(2011, 11, 30) }
-
-      it { expect(mod).to be SingaporeCPFCalculator::Year2015::CitizenOrSPR3 }
-    end
 
   end
 end
