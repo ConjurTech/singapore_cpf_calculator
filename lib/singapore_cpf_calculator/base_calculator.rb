@@ -59,11 +59,43 @@ module SingaporeCPFCalculator
     end
 
     def calculated_total_contribution
-      raise NotImplementedError, "sub classes needs to implement #calculated_total_contribution"
+      case
+      when total_wages <= d("50.00")
+        d("0.0")
+      when total_wages <= d("500.00")
+        tc_rate_1 * total_wages
+      when total_wages < d("750.0000")
+        ((tc_rate_1) * total_wages) + (adjustment_rate * (total_wages - d("500.00")))
+      else # >= $750
+        (tc_rate_2 * capped_ordinary_wages) + (tc_rate_2 * additional_wages)
+      end
     end
 
     def calculated_employee_contribution
-      raise NotImplementedError, "sub classes needs to implement #calculated_employee_contribution"
+      case
+      when total_wages < d("500.0000")
+        d("0.0")
+      when total_wages < d("750.0000")
+        (adjustment_rate * (total_wages - d("500.00")))
+      else # >= $750
+        (ec_rate * capped_ordinary_wages) + (ec_rate * additional_wages)
+      end
+    end
+
+    def tc_rate_1
+      raise NotImplementedError, "sub classes needs to implement #tc_rate_1"
+    end
+
+    def tc_rate_2
+      raise NotImplementedError, "sub classes needs to implement #tc_rate_2"
+    end
+
+    def ec_rate
+      raise NotImplementedError, "sub classes needs to implement #ec_rate"
+    end
+
+    def adjustment_rate
+      raise NotImplementedError, "sub classes needs to implement #adjustment_rate"
     end
 
     def capped_ordinary_wages
