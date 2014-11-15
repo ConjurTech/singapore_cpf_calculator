@@ -17,31 +17,23 @@ module SingaporeCPFCalculator
 
         private
 
-        def calculated_total_contribution
-          case
-          when total_wages <= d("50.00")
-            d("0.0")
-          when total_wages <= d("500.00")
-            (d("0.105")) * total_wages
-          when total_wages < d("750.0000")
-            ((d("0.105")) * total_wages) + (d("0.39") * (total_wages - d("500.00")))
-          else # >= $750
-            (d("0.235") * capped_ordinary_wages) + (d("0.235") * additional_wages)
-          end
+        def tc_rate_1
+          d "0.105"
         end
 
-        def calculated_employee_contribution
-          case
-          when total_wages < d("500.0000")
-            d("0.0")
-          when total_wages < d("750.0000")
-            (d("0.39") * (total_wages - d("500.00")))
-          else # >= $750
-            (d("0.13") * capped_ordinary_wages) + (d("0.13") * additional_wages)
-          end
+        def tc_rate_2
+          d "0.235"
         end
 
-      end
+        def adjustment_rate
+          d "0.39"
+        end
+
+        def ec_rate
+          d "0.13"
+        end
+
+    end
 
     end
   end
