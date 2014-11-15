@@ -18,19 +18,19 @@ module SingaporeCPFCalculator
         private
 
         def tc_rate_1
-          d("0.17")
+          "0.17"
         end
 
         def tc_rate_2
-          d("0.32")
+          "0.32"
         end
 
         def ec_rate
-          d("0.15")
+          "0.15"
         end
 
         def adjustment_rate
-          d("0.45")
+          "0.45"
         end
 
       end

@@ -63,11 +63,11 @@ module SingaporeCPFCalculator
       when total_wages <= d("50.00")
         d("0.0")
       when total_wages <= d("500.00")
-        tc_rate_1 * total_wages
+        d(tc_rate_1) * total_wages
       when total_wages < d("750.0000")
-        ((tc_rate_1) * total_wages) + (adjustment_rate * (total_wages - d("500.00")))
+        (d(tc_rate_1) * total_wages) + (d(adjustment_rate) * (total_wages - d("500.00")))
       else # >= $750
-        (tc_rate_2 * capped_ordinary_wages) + (tc_rate_2 * additional_wages)
+        (d(tc_rate_2) * capped_ordinary_wages) + (d(tc_rate_2) * additional_wages)
       end
     end
 
@@ -76,9 +76,9 @@ module SingaporeCPFCalculator
       when total_wages < d("500.0000")
         d("0.0")
       when total_wages < d("750.0000")
-        (adjustment_rate * (total_wages - d("500.00")))
+        (d(adjustment_rate) * (total_wages - d("500.00")))
       else # >= $750
-        (ec_rate * capped_ordinary_wages) + (ec_rate * additional_wages)
+        (d(ec_rate) * capped_ordinary_wages) + (d(ec_rate) * additional_wages)
       end
     end
 
