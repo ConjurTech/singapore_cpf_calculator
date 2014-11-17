@@ -38,8 +38,9 @@ Or install it yourself as:
 
 ## Usage
 
-Use `SingaporeCPFCalculator.calculate` to calculate for CPF contribution. The method return a hash
-of the amounts for employee, employer, and the total.
+Use {SingaporeCPFCalculator.calculate} to calculate for CPF contribution. The method return a
+{SingaporeCPFCalculator::CPFContribution} object responding to {SingaporeCPFCalculator::CPFContribution#employee},
+{SingaporeCPFCalculator::CPFContribution#employer} and {SingaporeCPFCalculator::CPFContribution#total}.
 
 ```ruby
   require "singapore_cpf_calculator"
@@ -53,7 +54,10 @@ of the amounts for employee, employer, and the total.
                                             employee_contribution_type: "full",
                                             employer_contribution_type: "full"
 
-  result # => { "total" => 343.00, "employee" => 190.00, "employer" => 153.00 }
+  result # => #<SingaporeCPFCalculator::CPFContribution ...>
+  result.employee # => 190.00
+  result.employer # => 153.00
+  result.total # => 343.00
 ```
 
 The following parameters needs to be specified:

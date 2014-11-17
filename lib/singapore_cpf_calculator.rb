@@ -14,10 +14,14 @@ module SingaporeCPFCalculator
     #                                             employee_contribution_type: "full",
     #                                             employer_contribution_type: "full"
     #
-    #   result # => { "total" => 343.00, "employee" => 190.00, "employer" => 153.00 }
+    #   result # => #<SingaporeCPFCalculator::CPFContribution ...>
+    #   result.employee # => 190.00
+    #   result.employer # => 153.00
+    #   result.total # => 343.00
+    #
     #
     # @param [Fixnum] age: age of the employee as of the specified date
-    # @param [Date] date: relavant date when the CPF contribution is being calculated
+    # @param [Date] date: relevant date when the CPF contribution is being calculated
     # @param [String] residency_status: ["citizen", "permanent_resident"]
     # @param [Date] spr_start_date: date when the employee became a Singapore permanent resident
     # @param [String] employee_contribution_type: ["full", "graduated"]
@@ -31,7 +35,7 @@ module SingaporeCPFCalculator
     #   month, such as annual bonus and leave pay. These and other incentive payments may be made at
     #   intervals of more than a month.
     #
-    # @return [Hash <"total", "employee", "employer">]
+    # @return [CPFContribution]
     def calculate(
       age:,
       date:,

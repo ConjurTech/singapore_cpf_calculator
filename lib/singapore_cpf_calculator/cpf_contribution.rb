@@ -3,8 +3,11 @@ module SingaporeCPFCalculator
   # Result object that describes the total, employee, and employer contribution.
   class CPFContribution
 
+    # @return [BigDecimal]
     attr_reader :total, :employee
 
+    # @param [BigDecimal] total the total contribution amount
+    # @param [BigDecimal] employee the employee contribution amount
     def initialize(total:, employee:)
       @total = total
       @employee = employee
@@ -16,7 +19,7 @@ module SingaporeCPFCalculator
     end
 
     # @param [CPFContribution] other
-    # @return [true, false]
+    # @return [TrueClass, FalseClass]
     def ==(other)
       total == other.total && employee == other.employee
     end
