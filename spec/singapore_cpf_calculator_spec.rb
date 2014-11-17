@@ -27,7 +27,7 @@ describe SingaporeCPFCalculator do
       let(:employee_contribution_type) { nil }
       let(:employer_contribution_type) { nil }
 
-      it { expect(result).to eq "total" => 343.00, "employee" => 190.00, "employer" => 153.00 }
+      it { expect(result).to equal_cpf total: 343.00, employee: 190.00, employer: 153.00 }
     end
 
     describe "30 years old earning $952.00 a month before permanent residency" do
@@ -40,7 +40,7 @@ describe SingaporeCPFCalculator do
       let(:employee_contribution_type) { "graduated" }
       let(:employer_contribution_type) { "graduated" }
 
-      it { expect(result).to eq "total" => 0.00, "employee" => 0.00, "employer" => 0.00 }
+      it { expect(result).to equal_cpf total: 0.00, employee: 0.00, employer: 0.00 }
     end
 
   end

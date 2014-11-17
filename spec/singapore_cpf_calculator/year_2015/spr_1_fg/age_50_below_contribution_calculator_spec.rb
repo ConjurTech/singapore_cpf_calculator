@@ -15,47 +15,47 @@ describe SingaporeCPFCalculator::Year2015::SPR1FG::Age50BelowContributionCalcula
 
     context "when the total wages amounts to 0.00" do
       let(:ordinary_wages) { 0.00 }
-      it { expect(result).to eq "total" => 0.00, "employee" => 0.00, "employer" => 0.00 }
+      it { expect(result).to equal_cpf total: 0.00, employee: 0.00, employer: 0.00 }
     end
 
     context "when the total wages amounts to 50.00" do
       let(:ordinary_wages) { 50.00 }
-      it { expect(result).to eq "total" => 0.00, "employee" => 0.00, "employer" => 0.00 }
+      it { expect(result).to equal_cpf total: 0.00, employee: 0.00, employer: 0.00 }
     end
 
     context "when the total wages amounts to 50.01" do
       let(:ordinary_wages) { 50.01 }
-      it { expect(result).to eq "total" => 9.00, "employee" => 0.00, "employer" => 9.00 }
+      it { expect(result).to equal_cpf total: 9.00, employee: 0.00, employer: 9.00 }
     end
 
     context "when the total wages amounts to 500.00" do
       let(:ordinary_wages) { 500.00 }
-      it { expect(result).to eq "total" => 85.00, "employee" => 0.00, "employer" => 85.00 }
+      it { expect(result).to equal_cpf total: 85.00, employee: 0.00, employer: 85.00 }
     end
 
     context "when the total wages amounts to 500.01" do
       let(:ordinary_wages) { 500.01 }
-      it { expect(result).to eq "total" => 85.00, "employee" => 0.00, "employer" => 85.00 }
+      it { expect(result).to equal_cpf total: 85.00, employee: 0.00, employer: 85.00 }
     end
 
     context "when the total wages amounts to 749.99" do
       let(:ordinary_wages) { 749.99 }
-      it { expect(result).to eq "total" => 165.00, "employee" => 37.00, "employer" => 128.00 }
+      it { expect(result).to equal_cpf total: 165.00, employee: 37.00, employer: 128.00 }
     end
 
     context "when the total wages amounts to 750.00" do
       let(:ordinary_wages) { 750.00 }
-      it { expect(result).to eq "total" => 165.00, "employee" => 37.00, "employer" => 128.00 }
+      it { expect(result).to equal_cpf total: 165.00, employee: 37.00, employer: 128.00 }
     end
 
     context "when the total wages amounts to 5,000.00" do
       let(:ordinary_wages) { 5_000.00 }
-      it { expect(result).to eq "total" => 1_100.00, "employee" => 250.00, "employer" => 850.00 }
+      it { expect(result).to equal_cpf total: 1_100.00, employee: 250.00, employer: 850.00 }
     end
 
     context "when the total wages amounts to 10,000.00" do
       let(:ordinary_wages) { 10_000.00 }
-      it { expect(result).to eq "total" => 1_100.00, "employee" => 250.00, "employer" => 850.00 }
+      it { expect(result).to equal_cpf total: 1_100.00, employee: 250.00, employer: 850.00 }
     end
 
   end

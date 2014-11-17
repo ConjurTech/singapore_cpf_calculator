@@ -16,11 +16,8 @@ describe "Company A" do
       }
 
       let(:expected_result) {
-        {
-          "total" => BigDecimal.new(row["Total CPF$"]),
-          "employee" => BigDecimal.new(row["Employee CPF$"]),
-          "employer" => BigDecimal.new(row["Employer CPF$"]),
-        }
+        SingaporeCPFCalculator::CPFContribution.new total: BigDecimal.new(row["Total CPF$"]),
+                                                    employee: BigDecimal.new(row["Employee CPF$"])
       }
 
       let(:age) { ( date.to_time - row["Birthdate"].to_time ) / 1.year }

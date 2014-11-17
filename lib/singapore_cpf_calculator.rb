@@ -104,6 +104,7 @@ module SingaporeCPFCalculator
 
 end
 
+require_relative "singapore_cpf_calculator/cpf_contribution"
 require_relative "singapore_cpf_calculator/base_calculator"
 require_relative "singapore_cpf_calculator/before_spr"
 require_relative "singapore_cpf_calculator/spr_status"

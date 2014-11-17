@@ -90,3 +90,23 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+RSpec::Matchers.define :equal_cpf do |expected|
+  match do |actual|
+    actual == cpf_contribution_for(expected)
+  end
+
+  failure_message do |actual|
+    "expected total: #{ actual.total }, employee: #{ actual.employee }\n" +
+      "to match total: #{ expected.fetch(:total) }, employee: #{ expected.fetch(:employee) }"
+  end
+
+  description do
+    "to equal total: #{ expected.fetch(:total) }, employee: #{ expected.fetch(:employee) }"
+  end
+
+  def cpf_contribution_for(expected)
+    SingaporeCPFCalculator::CPFContribution.new total: expected.fetch(:total),
+                                                employee: expected.fetch(:employee)
+  end
+end

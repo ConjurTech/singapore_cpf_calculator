@@ -31,11 +31,8 @@ module SingaporeCPFCalculator
 
     # @return [Hash] returns the total, employee, employer amounts for the CPF contribution
     def calculate
-      {
-        "total" => total_contribution,
-        "employee" => employee_contribution,
-        "employer" => employer_contribution,
-      }
+      CPFContribution.new total: total_contribution,
+                          employee: employee_contribution
     end
 
     private
